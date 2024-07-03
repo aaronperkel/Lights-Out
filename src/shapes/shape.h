@@ -130,7 +130,7 @@ protected:
     vec2 size;
 
     /// @brief The VAO of the shape
-    color color;
+    color shapeColor;
 
     /// @brief The Vertex Array Object, Vertex Buffer Object, and Element Buffer Object of the shape.
     unsigned int VAO, VBO, EBO;

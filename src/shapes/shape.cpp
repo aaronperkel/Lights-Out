@@ -2,10 +2,10 @@
 
 
 Shape::Shape(Shader &shader, glm::vec2 pos, glm::vec2 size, struct color color, int s) :
-        shader(shader), pos(pos), size(size), color(color), status(s) {}
+        shader(shader), pos(pos), size(size), shapeColor(color), status(s) {}
 
 Shape::Shape(Shape const& other) :
-        shader(other.shader), pos(other.pos), size(other.size), color(other.color) {}
+        shader(other.shader), pos(other.pos), size(other.size), shapeColor(other.shapeColor) {}
 
 int Shape::getStatus() const {
     return status;
@@ -63,7 +63,7 @@ void Shape::setUniforms() const {
 
     // Set the model matrix and color uniform variables in the shader
     this->shader.setMatrix4("model", model);
-    this->shader.setVector4f("shapeColor", color.vec);
+    this->shader.setVector4f("shapeColor", shapeColor.vec);
 }
 
 bool Shape::isOverlapping(const vec2 &point) const {
@@ -83,13 +83,13 @@ void Shape::setPos(vec2 pos)          { this->pos = pos; }
 void Shape::setPosX(float x)          { pos.x = x; }
 void Shape::setPosY(float y)          { pos.y = y; }
 
-void Shape::setColor(struct color c)    { color = c; }
-void Shape::setColor(vec4 c)     { color.vec = c; }
-void Shape::setColor(vec3 c)     { color.vec = vec4(c, 1.0); }
-void Shape::setRed(float r)      { color.red = r; }
-void Shape::setGreen(float g)    { color.green = g; }
-void Shape::setBlue(float b)     { color.blue = b; }
-void Shape::setOpacity(float a)  { color.alpha = a; }
+void Shape::setColor(struct color c)    { shapeColor = c; }
+void Shape::setColor(vec4 c)     { shapeColor.vec = c; }
+void Shape::setColor(vec3 c)     { shapeColor.vec = vec4(c, 1.0); }
+void Shape::setRed(float r)      { shapeColor.red = r; }
+void Shape::setGreen(float g)    { shapeColor.green = g; }
+void Shape::setBlue(float b)     { shapeColor.blue = b; }
+void Shape::setOpacity(float a)  { shapeColor.alpha = a; }
 
 void Shape::setSize(vec2 size) { this->size = size; }
 void Shape::setSizeX(float x)  { size.x = x; }
@@ -104,11 +104,11 @@ vec2 Shape::getPos() const      { return pos; }
 float Shape::getPosX() const    { return pos.x; }
 float Shape::getPosY() const    { return pos.y; }
 vec2 Shape::getSize() const     { return size; }
-vec3 Shape::getColor3() const   { return {color.red, color.green, color.blue}; }
-vec4 Shape::getColor4() const   { return color.vec; }
-float Shape::getRed() const     { return color.red; }
-float Shape::getGreen() const   { return color.green; }
-float Shape::getBlue() const    { return color.blue; }
-float Shape::getOpacity() const { return color.alpha; }
+vec3 Shape::getColor3() const   { return {shapeColor.red, shapeColor.green, shapeColor.blue}; }
+vec4 Shape::getColor4() const   { return shapeColor.vec; }
+float Shape::getRed() const     { return shapeColor.red; }
+float Shape::getGreen() const   { return shapeColor.green; }
+float Shape::getBlue() const    { return shapeColor.blue; }
+float Shape::getOpacity() const { return shapeColor.alpha; }
 
 void Shape::update(float deltaTime) {}
